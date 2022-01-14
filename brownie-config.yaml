@@ -1,0 +1,20 @@
+# download chainlink contracts
+dependencies:
+  # - organization/repo@version name to download(https://github.com/smartcontractkit/chainlink-brownie-contracts)
+  - smartcontractkit/chainlink-brownie-contracts@1.1.1
+
+# let compiler know that whenever we are using @chainlink, we are referring to the above
+compiler:
+  solc:
+    remappings:
+      - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
+
+dotenv: .env
+wallets: 
+  from_key: ${PRIVATE_KEY}
+
+# Metamask Accounts
+# 0xdf0B3E2218b3bfb128eaEc6142F84227fC00bbDE
+# b49263c7af39733c625db5fda8569642c3ba05bbaf6295bfacab94aedc6effe0
+# 0x69651B9a2D32d7c889D1692D28E20F784db64c8A
+# 3e2c1085bfabd6941418ee06b7f2aad711c2d499811412a7b7e103cc8c1b0fcb
