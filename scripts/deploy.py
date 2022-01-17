@@ -1,23 +1,23 @@
 from brownie import FundMe, MockV3Aggregator, network, config
-from scripts.helpful_scripts import get_account
+from scripts.helpful_scripts import (
+    deploy_mocks,
+    get_account,
+    LOCAL_BLOCKCHAIN_ENVIRONMENTS,
+)
 
 
 def deploy_fund_me():
     account = get_account()
     print(account)
-    if network.show_active() != "development":
+    # grab price feed address depending on the network
+    if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         price_feed_address = config["networks"][network.show_active()][
             "eth_usd_price_feed"
         ]
     else:
-        print(f"The active network is {network.show_active()}")
-        print("Deploying Mocks...")
-        mock_aggregator = MockV3Aggregator.deploy(
-            18, 2000000000000000000000, {"from": account}
-        )
-        price_feed_address = mock_aggregator.address
-        print("Mocks deployed!")
-    # public_source=True: allows us to verify our code in etherscan
+        deploy_mocks()
+        price_feed_address = MockV3Aggregator[-1].address
+    # public_source: allows us to verify our code in etherscan.
     # need the api setup in .env to do this
     fund_me = FundMe.deploy(
         price_feed_address,
