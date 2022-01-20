@@ -24,6 +24,8 @@ def deploy_fund_me():
         {"from": account},
         publish_source=config["networks"][network.show_active()].get("verify"),
     )
+    # returning deployed contract so we can test
+    return fund_me
 
 
 def main():

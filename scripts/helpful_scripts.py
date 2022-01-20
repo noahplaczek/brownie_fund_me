@@ -1,10 +1,11 @@
 from brownie import accounts, network, config, MockV3Aggregator
 from web3 import Web3
 
+FORKED_LOCAL_ENVIRONMENTS = ["mainnet-fork"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local"]
 
-DECIMALS = 18
-STARTING_PRICE = 2000
+DECIMALS = 8
+STARTING_PRICE = 200000000000
 
 # based on the type of environment, will pull in the appropriate accounts
 def get_account():
@@ -21,8 +22,7 @@ def deploy_mocks():
         print("Deploying Mocks...")
         MockV3Aggregator.deploy(
             DECIMALS,
-            # toWei will add 18 decimals and make our 2,000 more readable
-            Web3.toWei(STARTING_PRICE, "ether"),
+            STARTING_PRICE,
             {"from": get_account()},
         )
         print("Mocks deployed!")
