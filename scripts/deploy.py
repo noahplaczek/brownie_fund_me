@@ -27,6 +27,9 @@ def deploy_fund_me():
     # returning deployed contract so we can test
     return fund_me
 
+# 6:01:17
 
 def main():
     deploy_fund_me()
+
+# mainnet-work

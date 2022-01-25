@@ -9,7 +9,7 @@ STARTING_PRICE = 200000000000
 
 # based on the type of environment, will pull in the appropriate accounts
 def get_account():
-    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
+    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS or network.show_active() in FORKED_LOCAL_ENVIRONMENTS:
         return accounts[0]
     else:
         return accounts.add(config["wallets"]["from_key"])
